@@ -21,35 +21,29 @@
         <div class="container mb-4 mt-1" id="headtag2">Here is your current location</div>
         <div class="container" id="latlon">
             <span class="btn pt-4" id="lat">Lat: 9879799</span>
-            <span class="btn pt-4 m-4" id="lon">Long: 2383273278</span>
+            <span class="btn pt-4 m-4" id="lon">Lon: 2383273278</span>
         </div>
         <div class="container" id="maping"></div>
-
     </div>
+
     <div class="container" id="footerid">
         <div class="footheading">Your Weather Data</div>
         <div class="container">
             <div class="row row-cols-3" id="iterator">
                 <div class="container" id="A">Location: New Delhi</div>
                 <div class="container" id="B">Wind Speed: 100kmph</div>
-                <div class="container" id="C">Humidity : 10</div>
-                <div class="container" id="D">Time Zone : GMT +5:30</div>
+                <div class="container" id="C">Humidity: 10</div>
+                <div class="container" id="D">Time Zone: GMT +5:30</div>
                 <div class="container" id="E">Pressure: 10atm</div>
-                <div class="container" id="F">Wind Direction : North West</div>
-                <div class="container" id="G">UV Index : 500</div>
-                <div class="container" id="H">Feels like: 30°</div>
+                <div class="container" id="F">Wind Direction: North West</div>
+                <div class="container" id="G">UV Index: 500</div>
+                <div class="container" id="H">Feels like: 30°C</div>
             </div>
         </div>
     </div>
 
     <!-- Include the JavaScript file -->
     <script src="/javascript.js"></script>
-    <script>
-        // Check if this is homepage.html and then fetch and display weather data
-        if (window.location.pathname.endsWith('homepage.html')) {
-            fetchAndDisplayWeatherData();
-        }
-    </script>
 </body>
 
 </html>

@@ -1,11 +1,7 @@
-
-function gUrlParm(name) {
+function gUrlParam(name) {
     const urlParams = new URLSearchParams(window.location.search);
     return urlParams.get(name);
 }
-
-
-
 
 function formatTimeZone(offset) {
     const hours = Math.floor(Math.abs(offset) / 3600);
@@ -14,8 +10,7 @@ function formatTimeZone(offset) {
     return `GMT ${sign}${hours}:${minutes.toString().padStart(2, '0')}`;
 }
 
-
-function degtodic(degrees) {
+function degreesToDirection(degrees) {
     const directions = ['North', 'North East', 'East', 'South East', 'South', 'South West', 'West', 'North West'];
     const index = Math.round(degrees / 45) % 8;
     return directions[index];
@@ -23,8 +18,8 @@ function degtodic(degrees) {
 
 // Function to fetch and display weather data
 function getAndDisplayData() {
-    const latitude = parseFloat(gUrlParm('lat'));
-    const longitude = parseFloat(gUrlParm('lon'));
+    const latitude = parseFloat(gUrlParam('lat'));
+    const longitude = parseFloat(gUrlParam('lon'));
 
     const apiKey = '5877846f0524ff38ab7a9e4bdc96a0fb'; // Replace with your OpenWeatherMap API key
     const url = `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${apiKey}`;
@@ -38,7 +33,7 @@ function getAndDisplayData() {
             const timeOffset = data.timezone;
             const pressure = (data.main.pressure / 1013.25).toFixed(2); // Convert hPa to atm
             const windDirectionDegrees = data.wind.deg;
-            const windDirection = degtodic(windDirectionDegrees);
+            const windDirection = degreesToDirection(windDirectionDegrees);
 
             // Fetch UV Index data
             const uvUrl = `https://api.openweathermap.org/data/2.5/uvi?lat=${latitude}&lon=${longitude}&appid=${apiKey}`;
@@ -47,28 +42,27 @@ function getAndDisplayData() {
                 .then(uvData => {
                     const uvIndex = uvData.value;
                     const feelsLike = (data.main.feels_like - 273.15).toFixed(2); // Convert Kelvin to Celsius
-                    document.getElementById("lat").innerHTML=`Lat: ${latitude}`;
-                    document.getElementById("lon").innerHTML=`Lat: ${longitude}`;
 
-                    document.getElementById("maping").innerHTML=`<iframe 
+                    document.getElementById("lat").innerHTML = `Lat: ${latitude}`;
+                    document.getElementById("lon").innerHTML = `Lon: ${longitude}`;
+
+                    document.getElementById("maping").innerHTML = `<iframe 
                     width="1305" 
                     height="683" 
                     frameborder="0" 
                     scrolling="no" 
                     marginheight="0" 
                     marginwidth="0" 
-                    src="https://maps.google.com/maps?q=+${latitude}+,+${longitude}+&hl=es&z=14&amp;output=embed"
+                    src="https://maps.google.com/maps?q=${latitude},${longitude}&hl=es&z=14&amp;output=embed"
                    ><br>`;
-                   document.getElementById("A").innerHTML=`Location: ${location}`
-                   document.getElementById("B").innerHTML=`Wind Speed: : ${windSpeed}`
-                   document.getElementById("C").innerHTML=`Humidity : ${humidity}`
-                   document.getElementById("D").innerHTML=`Time Zone : ${formatTimeZone(timeOffset)}`
-                   document.getElementById("E").innerHTML=`Pressure: ${pressure}`
-                   document.getElementById("F").innerHTML=`Wind Direction : ${windDirection}`
-                   document.getElementById("G").innerHTML=`UV Index : ${uvIndex}`
-                   document.getElementById("H").innerHTML=`Feels like: ${feelsLike}`
-
-                    document.getElementById('weatherData').innerHTML = weatherData;
+                    document.getElementById("A").innerHTML = `Location: ${location}`;
+                    document.getElementById("B").innerHTML = `Wind Speed: ${windSpeed} km/h`;
+                    document.getElementById("C").innerHTML = `Humidity: ${humidity}%`;
+                    document.getElementById("D").innerHTML = `Time Zone: ${formatTimeZone(timeOffset)}`;
+                    document.getElementById("E").innerHTML = `Pressure: ${pressure} atm`;
+                    document.getElementById("F").innerHTML = `Wind Direction: ${windDirection}`;
+                    document.getElementById("G").innerHTML = `UV Index: ${uvIndex}`;
+                    document.getElementById("H").innerHTML = `Feels like: ${feelsLike}°C`;
                 })
                 .catch(uvError => {
                     console.error('Unable to fetch UV Index data:', uvError);
@@ -80,7 +74,6 @@ function getAndDisplayData() {
 }
 
 function getLocation() {
- 
     navigator.geolocation.getCurrentPosition(
         position => {
             const latitude = position.coords.latitude;
@@ -93,8 +86,12 @@ function getLocation() {
     );
 }
 
-
 const getLocationButton = document.getElementById('getLocationButton');
 if (getLocationButton) {
     getLocationButton.addEventListener('click', getLocation);
+}
+
+// Check if this is homepage.html and then fetch and display weather data
+if (window.location.pathname.endsWith('homepage.html')) {
+    getAndDisplayData();
 }
