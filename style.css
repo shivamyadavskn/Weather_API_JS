@@ -1,0 +1,39 @@
+body {
+    background: #360369;
+    color: #FFF;
+}
+
+
+#headin {
+    width: 692.268px;
+    height: 144px;
+
+    color: #FFF;
+    text-align: center;
+    font-family: Montserrat;
+    font-size: 100px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+}
+
+#getLocationButton {
+    width: 492px;
+    height: 58px;
+    background: #FFF;
+    color: #000;
+    text-align: center;
+    font-family: Montserrat;
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 300;
+    line-height: normal;
+    margin-left: 80px;
+}
+
+#cent{
+    text-align: center;
+    align-items: center;
+    margin-top: 150px;
+}
+
