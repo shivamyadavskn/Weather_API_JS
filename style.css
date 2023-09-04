@@ -15,6 +15,7 @@ body {
     font-style: normal;
     font-weight: 700;
     line-height: normal;
+ 
 }
 
 #getLocationButton {
@@ -28,7 +29,7 @@ body {
     font-style: normal;
     font-weight: 300;
     line-height: normal;
-    margin-left: 80px;
+    
 }
 
 #cent{
